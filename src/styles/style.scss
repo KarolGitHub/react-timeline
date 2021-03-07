@@ -133,9 +133,15 @@ main {
   margin: 0 auto;
   left: 0;
   right: 0;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
 }
 .timeline-event-content > img:hover {
-  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px $border-darkgray;
+}
+.timeline-event-content > img:active {
+  transform: scale(0.9);
 }
 
 .timeline-event-circle {
@@ -174,7 +180,7 @@ main {
   top: -70px;
   left: 85%;
   z-index: 1;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: visibility 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .timeline-event-description-close {
