@@ -1,8 +1,7 @@
-// $background-gray: #f2f2f2;
-$background-gray2: #f7f7f7;
-$background-darkgray: #30323d;
-$background-white: #fff;
+$border-darkgray: #30323d;
+$background-white: #eee;
 $background-gray: #e0e0e0;
+$black: #333;
 $red: #d8292a;
 $yellow: #eca733;
 $green: #007048;
@@ -20,6 +19,8 @@ html,
 }
 
 body {
+  box-sizing: border-box;
+  outline: none;
   margin: 0;
   border: 0;
   font-family: Rubik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
@@ -34,16 +35,24 @@ code {
     monospace;
 }
 
+main {
+  min-height: 100vh;
+}
+
 .timeline-container {
-  width: max-content;
-  margin: 165px auto;
+  min-width: fit-content;
+  max-width: 100%;
+  height: 100%;
 }
 
 .timeline {
   position: relative;
-  display: block;
-  width: 100%;
-  height: 165px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: 100vh;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -57,39 +66,27 @@ code {
 
 .timeline-event:nth-child(1n) {
   background: $light-blue;
-  span {
-    color: $light-blue;
-  }
+  color: $light-blue;
 }
 .timeline-event:nth-child(2n) {
   background: $violet;
-  span {
-    color: $violet;
-  }
+  color: $violet;
 }
 .timeline-event:nth-child(3n) {
   background: $blue;
-  span {
-    color: $blue;
-  }
+  color: $blue;
 }
 .timeline-event:nth-child(4n) {
   background: $indigo;
-  span {
-    color: $indigo;
-  }
+  color: $indigo;
 }
 .timeline-event:nth-child(5n) {
   background: $dark-blue;
-  span {
-    color: $dark-blue;
-  }
+  color: $dark-blue;
 }
 .timeline-event:nth-child(6n) {
   background: $pink;
-  span {
-    color: $pink;
-  }
+  color: $pink;
 }
 
 .timeline-event:nth-child(1n) .timeline-event-content {
@@ -102,7 +99,6 @@ code {
     margin-left: 27px;
   }
 }
-
 .timeline-event:nth-child(2n) .timeline-event-content {
   margin-top: 20px;
   > img {
@@ -117,7 +113,6 @@ code {
 .timeline-event-content {
   position: relative;
 }
-
 .timeline-event-content:before {
   content: '';
   width: 50px;
@@ -139,6 +134,9 @@ code {
   left: 0;
   right: 0;
 }
+.timeline-event-content > img:hover {
+  cursor: pointer;
+}
 
 .timeline-event-circle {
   margin: 0 auto;
@@ -159,4 +157,57 @@ code {
   font-size: 20px;
   font-weight: bold;
   user-select: none;
+}
+
+.timeline-event-description {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: $black 2px 2px 10px;
+  background-color: $background-white;
+  border: 2px solid $border-darkgray;
+  max-height: fit-content;
+  min-width: 200px;
+  max-width: 100vw;
+  top: -70px;
+  left: 85%;
+  z-index: 1;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.timeline-event-description-close {
+  clear: both;
+  float: right;
+  margin: -5px -3px 0 0;
+}
+.timeline-event-description-close > img {
+  position: absolute;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+}
+.timeline-event-description-close > img:hover {
+  cursor: pointer;
+  filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg)
+    saturate(600%) contrast(0.8);
+}
+.timeline-event-description-content {
+  display: flex;
+  flex-direction: column;
+}
+.timeline-event-description-content > p {
+  line-height: 18px;
+  margin: 0;
+}
+.timeline-event-description-content > h4,
+h5 {
+  padding-right: 16px;
+  margin: 0 0 10px 0;
+}
+.timeline-event-description-content > p,
+h5 {
+  color: $black;
 }

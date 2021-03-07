@@ -3,9 +3,9 @@ import Timeline from './components/Timeline';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <main>
       <Timeline />
-    </div>
+    </main>
   );
 };
 
