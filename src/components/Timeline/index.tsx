@@ -14,9 +14,9 @@ const Timeline: React.FC = () => {
     ];
   };
 
-  const eventModalHandler = (e: any, eventIndex: number) => {
+  const eventModalHandler = (e: any, eventIndex: number | null = null) => {
+    const eventDescription = e.target.nextSibling;
     if (eventModal !== eventIndex) {
-      const eventDescription = e.target.nextSibling;
       const boundingRect = eventDescription.getBoundingClientRect();
       const [bottomExtend, rightExtend] = isElementOutOfViewport(boundingRect);
       if (bottomExtend || rightExtend) {
@@ -26,6 +26,8 @@ const Timeline: React.FC = () => {
           inline: 'nearest',
         });
       }
+      eventDescription.style.animation =
+        'descriptionCollapse 0.3s ease-in-out 1 forwards';
       setEventModal(eventIndex);
     } else {
       setEventModal(null);
@@ -44,6 +46,10 @@ const Timeline: React.FC = () => {
     return aDate.localeCompare(bDate);
   });
 
+  /*   useEffect(() => {
+    document.getElementsByClassName('timeline-event-description')..remove()
+  }, []);
+ */
   return (
     <div className='timeline-container'>
       <div className='timeline-events-container'>
@@ -59,12 +65,11 @@ const Timeline: React.FC = () => {
                     onClick={(e) => eventModalHandler(e, index)}
                   />
                   <div
-                    className='timeline-event-description'
-                    style={
+                    className={`timeline-event-description ${
                       eventModal === index
-                        ? { opacity: '1', visibility: 'visible' }
-                        : { opacity: '0', visibility: 'hidden' }
-                    }
+                        ? 'timeline-event-description--expanded'
+                        : ''
+                    }`}
                   >
                     <span className='timeline-event-description-close'>
                       <img
