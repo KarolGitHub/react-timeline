@@ -46,47 +46,49 @@ const Timeline: React.FC = () => {
 
   return (
     <div className='timeline-container'>
-      <ul className='timeline'>
-        {sortedEventObjects.map((eventObject: EventObject, index) => {
-          const eventObjectYear = getYear(eventObject);
-          return (
-            <li className='timeline-event' key={`event${index}`}>
-              <div className='timeline-event-content'>
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/${eventObject.icon}.svg`}
-                  alt={`${eventObject.icon}`}
-                  onClick={(e) => eventModalHandler(e, index)}
-                />
-                <div
-                  className='timeline-event-description'
-                  style={
-                    eventModal === index
-                      ? { opacity: '1', visibility: 'visible' }
-                      : { opacity: '0', visibility: 'hidden' }
-                  }
-                >
-                  <span className='timeline-event-description-close'>
-                    <img
-                      src={closeIcon}
-                      alt='close'
-                      onClick={() => setEventModal(null)}
-                    />
-                  </span>
-                  <div className='timeline-event-description-content'>
-                    <h4>{eventObject.title}</h4>
-                    <h5>{getDateLabel(eventObject.date)}</h5>
-                    <p>{eventObject.description}</p>
+      <div className='timeline-events-container'>
+        <ul className='timeline-events-wrapper'>
+          {sortedEventObjects.map((eventObject: EventObject, index) => {
+            const eventObjectYear = getYear(eventObject);
+            return (
+              <li className='timeline-event' key={`event${index}`}>
+                <div className='timeline-event-content'>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/icons/${eventObject.icon}.svg`}
+                    alt={`${eventObject.icon}`}
+                    onClick={(e) => eventModalHandler(e, index)}
+                  />
+                  <div
+                    className='timeline-event-description'
+                    style={
+                      eventModal === index
+                        ? { opacity: '1', visibility: 'visible' }
+                        : { opacity: '0', visibility: 'hidden' }
+                    }
+                  >
+                    <span className='timeline-event-description-close'>
+                      <img
+                        src={closeIcon}
+                        alt='close'
+                        onClick={() => setEventModal(null)}
+                      />
+                    </span>
+                    <div className='timeline-event-description-content'>
+                      <h4>{eventObject.title}</h4>
+                      <h5>{getDateLabel(eventObject.date)}</h5>
+                      <p>{eventObject.description}</p>
+                    </div>
                   </div>
+                  <span className='timeline-event-year'>{eventObjectYear}</span>
                 </div>
-                <span className='timeline-event-year'>{eventObjectYear}</span>
-              </div>
-              <div className='timeline-event-dot'>
-                <span className='timeline-event-circle'></span>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+                <div className='timeline-event-dot'>
+                  <span className='timeline-event-circle'></span>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
